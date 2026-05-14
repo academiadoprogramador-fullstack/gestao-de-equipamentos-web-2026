@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gestão de Equipamentos</title>
+        <title>@ViewBag.Titulo - Gestão de Equipamentos</title>
     </head>
     <body>
         <nav>
@@ -17,6 +17,10 @@
                 <a href="https://www.academiadoprogramador.net" target="_blank">Academia do Programador</a>
             <hr>
         </nav>
+
+        <header>
+            <h2>@ViewBag.Titulo</h2>
+        </header>
 
         <main>
             @RenderBody()

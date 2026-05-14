@@ -1,12 +1,11 @@
 ﻿@{
     Layout = "_Layout";
+    ViewBag.Titulo = "Edição de Fabricante";
 }
 
 @using GestaoDeEquipamentosWeb.ConsoleApp.ModuloFabricante
 
 @model Fabricante;
-
-<h2>Edição de Fabricante</h2>
 
 <form action="/Fabricante/Editar/@Model.Id" method="post">
     <div>
