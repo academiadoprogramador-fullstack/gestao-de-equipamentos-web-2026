@@ -159,3 +159,14 @@ nav {
     background-color: rgb(152, 62, 209);
     color: white;
 }
+
+.formulario-alerta {
+    margin-top: 0;
+    margin-bottom: 24px;
+    border-left: 4px solid rgb(152, 62, 209);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background-color: rgba(152, 62, 209, 0.1);
+    color: rgb(55, 44, 59);
+    font-weight: 600;
+}
