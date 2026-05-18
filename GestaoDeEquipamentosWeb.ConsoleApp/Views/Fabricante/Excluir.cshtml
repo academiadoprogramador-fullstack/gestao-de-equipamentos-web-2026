@@ -1,11 +1,11 @@
-﻿@{
+﻿@using GestaoDeEquipamentosWeb.ConsoleApp.Models
+
+@{
     Layout = "_Layout";
     ViewBag.Titulo = "Exclusão de Fabricante";
 }
 
-@using GestaoDeEquipamentosWeb.ConsoleApp.ModuloFabricante
-
-@model Fabricante;
+@model ExcluirFabricanteViewModel;
 
 <form class="formulario" action="/Fabricante/Excluir/@Model.Id" method="post">
     
