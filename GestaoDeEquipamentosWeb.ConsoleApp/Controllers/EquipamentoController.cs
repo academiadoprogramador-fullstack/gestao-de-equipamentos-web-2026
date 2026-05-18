@@ -73,6 +73,47 @@ public class EquipamentoController : Controller
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult Editar(string id)
+    {
+        Equipamento? equipamento = repositorioEquipamento.SelecionarPorId(id);
+
+        if (equipamento == null)
+            return RedirectToAction(nameof(Listar));
+
+        EditarEquipamentoViewModel editarVm = new EditarEquipamentoViewModel(
+            id,
+            equipamento.Nome,
+            equipamento.PrecoAquisicao,
+            equipamento.DataFabricacao,
+            equipamento.Fabricante.Id
+        );
+
+        ViewBag.Fabricantes = CarregarFabricantes();
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarEquipamentoViewModel editarVm)
+    {
+        Fabricante? fabricante = repositorioFabricante.SelecionarPorId(editarVm.FabricanteId);
+
+        if (fabricante == null)
+            return RedirectToAction(nameof(Listar));
+
+        Equipamento equipamentoAtualizado = new Equipamento(
+            editarVm.Nome,
+            editarVm.PrecoAquisicao,
+            editarVm.DataFabricacao,
+            fabricante
+        );
+
+        repositorioEquipamento.Editar(editarVm.Id, equipamentoAtualizado);
+
+        return RedirectToAction(nameof(Listar));
+    }
+
     private List<ListarFabricantesViewModel> CarregarFabricantes()
     {
         List<Fabricante> fabricantes = repositorioFabricante.SelecionarTodos();
