@@ -1,5 +1,6 @@
 using GestaoDeEquipamentosWeb.ConsoleApp.Compartilhado;
 using GestaoDeEquipamentosWeb.ConsoleApp.Compartilhado.Arquivos;
+using GestaoDeEquipamentosWeb.ConsoleApp.Models;
 using GestaoDeEquipamentosWeb.ConsoleApp.ModuloFabricante;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,22 @@ public class FabricanteController : Controller
     {
         List<Fabricante> fabricantes = repositorioFabricante.SelecionarTodos();
 
-        return View(fabricantes);
+        List<ListarFabricantesViewModel> listarVms = new List<ListarFabricantesViewModel>();
+
+        foreach (Fabricante f in fabricantes)
+        {
+            // mapear objeto por objeto para viewModels
+            ListarFabricantesViewModel viewModel = new ListarFabricantesViewModel(
+                f.Id,
+                f.Nome,
+                f.Email,
+                f.Telefone
+            );
+
+            listarVms.Add(viewModel);
+        }
+
+        return View(listarVms);
     }
 
     [HttpGet]
