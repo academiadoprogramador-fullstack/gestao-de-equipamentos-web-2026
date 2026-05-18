@@ -1,3 +1,5 @@
+using GestaoDeEquipamentosWeb.ConsoleApp.ModuloFabricante;
+
 namespace GestaoDeEquipamentosWeb.ConsoleApp.Models;
 
 public record ListarEquipamentosViewModel(
@@ -6,4 +8,11 @@ public record ListarEquipamentosViewModel(
     decimal PrecoAquisicao,
     DateTime DataFabricacao,
     string Fabricante
+);
+
+public record CadastrarEquipamentoViewModel(
+    string Nome,
+    decimal PrecoAquisicao,
+    DateTime DataFabricacao,
+    string FabricanteId
 );

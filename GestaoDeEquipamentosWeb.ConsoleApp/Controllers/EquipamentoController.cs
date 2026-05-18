@@ -2,6 +2,7 @@ using GestaoDeEquipamentosWeb.ConsoleApp.Compartilhado;
 using GestaoDeEquipamentosWeb.ConsoleApp.Compartilhado.Arquivos;
 using GestaoDeEquipamentosWeb.ConsoleApp.Models;
 using GestaoDeEquipamentosWeb.ConsoleApp.ModuloEquipamento;
+using GestaoDeEquipamentosWeb.ConsoleApp.ModuloFabricante;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoDeEquipamentosWeb.ConsoleApp.Controllers;
@@ -9,6 +10,7 @@ namespace GestaoDeEquipamentosWeb.ConsoleApp.Controllers;
 public class EquipamentoController : Controller
 {
     private readonly IRepositorio<Equipamento> repositorioEquipamento;
+    private readonly IRepositorio<Fabricante> repositorioFabricante;
 
     public EquipamentoController()
     {
@@ -16,10 +18,10 @@ public class EquipamentoController : Controller
         contexto.Carregar();
 
         repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
+        repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
     }
 
     // Ações / Operação CRUD
-
     [HttpGet]
     public ActionResult Listar()
     {
@@ -41,5 +43,55 @@ public class EquipamentoController : Controller
         }
 
         return View(listarVms);
+    }
+
+    [HttpGet]
+    public ActionResult Cadastrar()
+    {
+        ViewBag.Fabricantes = CarregarFabricantes();
+
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarEquipamentoViewModel cadastrarVm)
+    {
+        Fabricante? fabricante = repositorioFabricante.SelecionarPorId(cadastrarVm.FabricanteId);
+
+        if (fabricante == null)
+            return RedirectToAction(nameof(Listar));
+
+        Equipamento novoEquipamento = new Equipamento(
+            cadastrarVm.Nome,
+            cadastrarVm.PrecoAquisicao,
+            cadastrarVm.DataFabricacao,
+            fabricante
+        );
+
+        repositorioEquipamento.Cadastrar(novoEquipamento);
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+    private List<ListarFabricantesViewModel> CarregarFabricantes()
+    {
+        List<Fabricante> fabricantes = repositorioFabricante.SelecionarTodos();
+
+        List<ListarFabricantesViewModel> listarVms = new List<ListarFabricantesViewModel>();
+
+        foreach (Fabricante f in fabricantes)
+        {
+            // mapear objeto por objeto para viewModels
+            ListarFabricantesViewModel viewModel = new ListarFabricantesViewModel(
+                f.Id,
+                f.Nome,
+                f.Email,
+                f.Telefone
+            );
+
+            listarVms.Add(viewModel);
+        }
+
+        return listarVms;
     }
 }
