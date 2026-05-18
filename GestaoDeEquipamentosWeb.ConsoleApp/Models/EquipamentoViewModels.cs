@@ -24,3 +24,11 @@ public record EditarEquipamentoViewModel(
     DateTime DataFabricacao,
     string FabricanteId
 );
+
+public record ExcluirEquipamentoViewModel(
+    string Id,
+    string Nome,
+    decimal PrecoAquisicao,
+    DateTime DataFabricacao,
+    string Fabricante
+);
