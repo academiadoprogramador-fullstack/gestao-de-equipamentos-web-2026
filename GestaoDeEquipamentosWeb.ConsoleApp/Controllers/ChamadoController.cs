@@ -77,7 +77,7 @@ public class ChamadoController : Controller
 
         Chamado novoChamado = new Chamado(
             cadastrarVm.Titulo,
-            equipamento,
+            equipamento!,
             cadastrarVm.Descricao
         );
 
@@ -129,7 +129,7 @@ public class ChamadoController : Controller
 
         Chamado chamadoAtualizado = new Chamado(
             editarVm.Titulo,
-            equipamento,
+            equipamento!,
             editarVm.Descricao
         );
 
