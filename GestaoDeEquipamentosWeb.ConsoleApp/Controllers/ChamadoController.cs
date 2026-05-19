@@ -6,6 +6,8 @@ using GestaoDeEquipamentosWeb.ConsoleApp.ModuloEquipamento;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+namespace GestaoDeEquipamentosWeb.ConsoleApp.Controllers;
+
 public class ChamadoController : Controller
 {
     private readonly IRepositorio<Chamado> repositorioChamado;
