@@ -4,6 +4,7 @@ using GestaoDeEquipamentosWeb.ConsoleApp.Models;
 using GestaoDeEquipamentosWeb.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentosWeb.ConsoleApp.ModuloEquipamento;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class ChamadoController : Controller
 {
@@ -41,5 +42,40 @@ public class ChamadoController : Controller
         }
 
         return View(visualizarChamados);
+    }
+
+    [HttpGet]
+    public ActionResult Cadastrar()
+    {
+        ViewBag.Equipamentos = CarregarEquipamentos();
+
+        CadastrarChamadoViewModel cadastrarVm = new CadastrarChamadoViewModel(string.Empty, null, string.Empty);
+
+        return View(cadastrarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarChamadoViewModel cadastrarVm)
+    {
+        return View();
+    }
+
+    private List<SelectListItem> CarregarEquipamentos()
+    {
+        List<Equipamento> equipamentos = repositorioEquipamento.SelecionarTodos();
+
+        List<SelectListItem> selecionarEquipamentos = new List<SelectListItem>();
+
+        foreach (Equipamento e in equipamentos)
+        {
+            SelectListItem selecionarEquipamentoVm = new SelectListItem(
+                e.Nome,
+                e.Id
+            );
+
+            selecionarEquipamentos.Add(selecionarEquipamentoVm);
+        }
+
+        return selecionarEquipamentos;
     }
 }

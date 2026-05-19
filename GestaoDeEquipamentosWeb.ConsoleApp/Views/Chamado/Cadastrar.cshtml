@@ -1,0 +1,31 @@
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Chamado";
+
+    List<SelectListItem> selecionarEquipamentos = ViewBag.Equipamentos;
+}
+
+@model CadastrarChamadoViewModel;
+
+<form class="formulario" asp-action="Cadastrar" method="post">
+    <div class="formulario-campo">
+        <label asp-for="Titulo">Título</label>
+        <input asp-for="Titulo" type="text">
+    </div>
+
+    <div class="formulario-campo">
+        <label asp-for="Descricao">Descrição</label>
+        <textarea asp-for="Descricao" maxlength="500"></textarea>
+    </div>
+
+    <div class="formulario-campo">
+        <label asp-for="EquipamentoId">Equipamento</label>
+        <select asp-for="EquipamentoId" asp-items="selecionarEquipamentos"></select>
+    </div>
+
+    
+    <div class="formulario-acoes">
+        <a asp-action="Listar">Voltar</a>
+        <button type="submit">Confirmar</button>
+    </div>
+</form>
