@@ -28,8 +28,8 @@
                 <td>@e.DataFabricacao.ToShortDateString()</td>
                 <td>@e.Fabricante</td>
                 <td>
-                    <a href="/Equipamento/Editar/@e.Id">Editar</a>
-                    <a href="/Equipamento/Excluir/@e.Id">Excluir</a>
+                    <a asp-action="Editar" asp-route-id="@e.Id">Editar</a>
+                    <a asp-action="Excluir" asp-route-id="@e.Id">Excluir</a>
                 </td>
             </tr>
         }
