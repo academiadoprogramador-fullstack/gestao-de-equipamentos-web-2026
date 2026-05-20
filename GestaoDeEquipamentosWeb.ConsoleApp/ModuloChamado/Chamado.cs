@@ -3,8 +3,6 @@ using GestaoDeEquipamentosWeb.ConsoleApp.ModuloEquipamento;
 
 namespace GestaoDeEquipamentosWeb.ConsoleApp.ModuloChamado;
 
-public delegate bool FiltroChamado(Chamado chamado);
-
 public class Chamado : EntidadeBase<Chamado>
 {
     public string Titulo { get; set; } = string.Empty;
