@@ -30,10 +30,10 @@ public class ChamadoController : Controller
         List<Chamado> chamados;
 
         if (statusSelecionado == "em-aberto")
-            chamados = repositorioChamado.SelecionarChamadosEmAberto();
+            chamados = repositorioChamado.FiltrarChamados(FiltrarChamadoEmAberto);
 
         else if (statusSelecionado == "concluidos")
-            chamados = repositorioChamado.SelecionarChamadosConcluidos();
+            chamados = repositorioChamado.FiltrarChamados(FiltrarChamadoConcluido);
 
         else
             chamados = repositorioChamado.SelecionarTodos();
@@ -205,5 +205,15 @@ public class ChamadoController : Controller
         }
 
         return selecionarEquipamentos;
+    }
+
+    private bool FiltrarChamadoEmAberto(Chamado chamado)
+    {
+        return !chamado.EstaConcluido;
+    }
+
+    private bool FiltrarChamadoConcluido(Chamado chamado)
+    {
+        return chamado.EstaConcluido;
     }
 }
