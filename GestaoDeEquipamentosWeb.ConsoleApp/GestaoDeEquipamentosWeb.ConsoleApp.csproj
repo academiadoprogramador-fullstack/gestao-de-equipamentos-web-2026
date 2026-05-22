@@ -8,14 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    
+    <Folder Include="Compartilhado\" />
     <Folder Include="ModuloChamado\" />
     <Folder Include="ModuloEquipamento\" />
-    <Folder Include="ModuloFabricante\" />
-    <Folder Include="Views\" />
-    <Folder Include="Views\Fabricante\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Shared\" />
+    <Folder Include="ModuloFabricante\" />    
+    <Folder Include="ModuloHome\" />  
+    
   </ItemGroup>
 
 </Project>
